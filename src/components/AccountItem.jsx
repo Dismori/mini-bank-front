@@ -5,10 +5,10 @@ function AccountItem(props) {
     return (
         <div className="AccountItem">
             <div className="">
-                {props.account.accountNumber}
+                {props.account.id}
             </div>
             <div>
-                {props.account.balance}
+                {props.account.name}
             </div>
         </div>
     )
