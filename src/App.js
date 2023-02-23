@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from "react";
+import AccountList from "./components/AccountList";
+import NavBar from "./components/NavBar";
+import './styles/App.css'
+
 
 function App() {
+
+  const [accounts, setAccounts] = useState([
+    { accountNumber: 22334455, balance: 3456 },
+    { accountNumber: 22334456, balance: 3456 },
+    { accountNumber: 22334457, balance: 3456 },
+    { accountNumber: 22334458, balance: 3456 }
+  ]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar />
+      <AccountList list={accounts} />
     </div>
   );
 }

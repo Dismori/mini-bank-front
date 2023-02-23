@@ -1,0 +1,28 @@
+* {
+    margin: 0;    
+    padding: 0;
+    box-sizing: border-box;
+    color: #959595;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+}
+
+.App {
+    width: auto;
+}
+
+.NavBar {
+    margin-top: 100px;
+}
+
+.Accounts {
+    border: 2px solid teal;
+}
+
+.AccountItem {
+    display: flex;
+}
+
