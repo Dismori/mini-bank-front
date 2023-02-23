@@ -6,7 +6,7 @@ function AccountList(props) {
 
     return (
         <div className="Accounts">
-            <span>Номер счета</span>
+            <div className="Description">Номер счета</div>
             {props.list.map(item =>
                 <AccountItem account={item} key={item.id}/>
             )}

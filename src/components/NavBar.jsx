@@ -1,8 +1,22 @@
 import React from "react";
 import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 function NavBar() {
+
+    const theme = createTheme({
+        components: {
+            MuiButton: {
+                styleOverrides: {
+                    root: {
+                        margin: "10px",
+                        padding: "10px",
+                        fontSize: '1rem'
+                    }
+                }
+            }
+        }
+    });
 
     function createAccount() {
         console.log('Hello')
@@ -11,15 +25,14 @@ function NavBar() {
 
     return (
         <div className="NavBar">
-        <ButtonGroup variant="contained" aria-label="outlined primary button group">
-            <Button>Пополнить счет</Button>
-            <Button onClick={createAccount}>Открыть счет</Button>
-            <Button>Перевести</Button>
-            <Button>Закрыть счет</Button>
-        </ButtonGroup>
+            <ThemeProvider theme={theme}>
+                <Button variant="contained">Пополнить счет</Button>
+                <Button variant="contained" onClick={createAccount}>Открыть счет</Button>
+                <Button variant="contained">Перевести</Button>
+                <Button variant="contained">Закрыть счет</Button>
+            </ThemeProvider>
         </div>
     );
 }
 
 export default NavBar;
-
