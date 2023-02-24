@@ -21,7 +21,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="app">
       <button onClick={()=>setModal(true)}>Button</button>
       <Modal visible={modal} setVisible={setModal}>fgdfg</Modal>
       <NavBar />
