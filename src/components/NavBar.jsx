@@ -2,7 +2,7 @@ import React from "react";
 import Button from '@mui/material/Button';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-function NavBar() {
+function NavBar(props) {
 
     const theme = createTheme({
         components: {
@@ -27,7 +27,7 @@ function NavBar() {
         <div className="NavBar">
             <ThemeProvider theme={theme}>
                 <Button variant="contained">Пополнить счет</Button>
-                <Button variant="contained" onClick={createAccount}>Открыть счет</Button>
+                <Button variant="contained" onClick={() => props.mod(true)}>Открыть счет</Button>
                 <Button variant="contained">Перевести</Button>
                 <Button variant="contained">Закрыть счет</Button>
             </ThemeProvider>
