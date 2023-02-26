@@ -42,3 +42,22 @@ html {
 .balance {
     display: flex;
 }
+
+.up_account {
+    padding: 40px;
+    margin: 10px;
+    background: white;
+}
+
+.up_account_form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.up_account_btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
