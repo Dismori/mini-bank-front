@@ -20,17 +20,12 @@ function NavBar(props) {
         }
     });
 
-    function createAccount() {
-        console.log('Hello')
-    }
-
-
     return (
         <div className="NavBar">
             <ThemeProvider theme={theme}>
                 <Button variant="contained" onClick={() => navigate("/update")}>Пополнить счет</Button>
                 <Button variant="contained" onClick={() => navigate("/create")}>Открыть счет</Button>
-                <Button variant="contained" onClick={() => navigate("/internal-transer")}>Перевести</Button>
+                <Button variant="contained" onClick={() => navigate("/transfer")}>Перевести</Button>
                 <Button variant="contained" onClick={() => navigate("/close")}>Закрыть счет</Button>
             </ThemeProvider>
             <div>

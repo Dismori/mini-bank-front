@@ -1,0 +1,13 @@
+.confirmation {
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+}
+
+.confirmation div {
+    margin: 30px ;
+}
+
+.act {
+    cursor: pointer;
+}
