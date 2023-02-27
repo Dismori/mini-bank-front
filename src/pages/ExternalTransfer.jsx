@@ -15,6 +15,8 @@ export default function ExternalTransfer() {
     const [selectedTo, setSelectedTo] = useState('');
     const [sum, setSum] = useState(0);
     const navigate = useNavigate();
+    const [error, setError] = useState("");
+    const [statusButton, setStatusButton] = useState(false);
 
     //загрузка счетов при загрузке страницы
     useEffect(() => {
@@ -34,6 +36,19 @@ export default function ExternalTransfer() {
         navigate("/")
     }
 
+    //валидация поля ввода суммы
+    const handleChange = (e) => {
+        const regex = /^[0-9]*[.,]?[0-9]{0,2}$/;
+        if (regex.test(e.target.value)) {
+            setSum(e.target.value)
+            setError("")
+            setStatusButton(false)
+        }
+        else {
+            setError("error");
+            setStatusButton(true)
+        }
+    }
 
     return (
         <div className="up_account">
@@ -54,14 +69,14 @@ export default function ExternalTransfer() {
                 </div>
             </div>
             <div className="up_account_form">
-            <TextField id="outlined-basic" label="Счет получателя" variant="outlined" />
+                <TextField id="outlined-basic" label="Счет получателя" variant="outlined" />
             </div>
             <div className="up_account_btn">
                 <div>
-                    <TextField id="standard-basic" label="Сумма" variant="standard" onChange={(event) => setSum(event.target.value)} />
+                    <TextField color={error} id="standard-basic" label="Сумма" variant="standard" onChange={(event) => handleChange(event)} />
                 </div>
                 <div>
-                    <Button variant="contained" onClick={intTransfer}>Перевести</Button>
+                    <Button disabled={statusButton} variant="contained" onClick={intTransfer}>Перевести</Button>
                 </div>
             </div>
         </div>
