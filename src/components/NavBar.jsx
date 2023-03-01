@@ -13,7 +13,7 @@ function NavBar(props) {
                     root: {
                         margin: "10px",
                         padding: "10px",
-                        fontSize: '1rem'
+                        // fontSize: '1rem'
                     }
                 }
             }

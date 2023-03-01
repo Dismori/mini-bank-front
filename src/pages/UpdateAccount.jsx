@@ -15,7 +15,7 @@ export default function UpdateAccount() {
     const [sum, setSum] = useState(0);
     const navigate = useNavigate();
     const [error, setError] = useState("");
-    const [statusButton, setStatusButton] = useState(false);
+    const [statusButton, setStatusButton] = useState(true);
 
     //загрузка счетов при загрузке страницы
     useEffect(() => {
@@ -38,7 +38,11 @@ export default function UpdateAccount() {
     //валидация поля ввода суммы
     const handleChange = (e) => {
         const regex = /^[0-9]*[.,]?[0-9]{0,2}$/;
-        if (regex.test(e.target.value)) {
+
+        if (e.target.value == "") {
+            setStatusButton(true)
+        }
+        else if (regex.test(e.target.value)) {
             setSum(e.target.value)
             setError("")
             setStatusButton(false)
