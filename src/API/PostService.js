@@ -2,9 +2,7 @@ import axios from "axios";
 
 export default class PostService {
     static async getAll() {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/users')
-
-        // const response = await axios.get('https://minibank.free.beeceptor.com')
+        const response = await axios.get('http://localhost:3001/getAccountsInfo', {headers: {ClientId: 12345}})
         console.log('getAll', response)
         return response.data;
     }
