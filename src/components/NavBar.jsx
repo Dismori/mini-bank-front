@@ -22,18 +22,16 @@ function NavBar(props) {
 
     return (
         <div>
-            <div>
-            <Button variant="contained" onClick={() => {
-                localStorage.removeItem('user')
-                navigate("/login")}}>Выйти</Button>
-            </div>
-
             <div className="NavBar">
                 <ThemeProvider theme={theme}>
                     <Button variant="contained" onClick={() => navigate("/update")}>Пополнить счет</Button>
                     <Button variant="contained" onClick={() => navigate("/create")}>Открыть счет</Button>
                     <Button variant="contained" onClick={() => navigate("/transfer")}>Перевести</Button>
                     <Button variant="contained" onClick={() => navigate("/close")}>Закрыть счет</Button>
+                    <Button variant="contained" onClick={() => {
+                        localStorage.removeItem('user')
+                        navigate("/login")
+                    }}>Выйти</Button>
                 </ThemeProvider>
                 <div>
                     <Outlet />
