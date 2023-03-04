@@ -8,6 +8,7 @@ import InternalTransfer from "../pages/InternalTransfer";
 import ExternalTransfer from "../pages/ExternalTransfer";
 import CloseAccount from "../pages/CloseAccount";
 import Login from "../pages/Login";
+import Registration from "../pages/Registration";
 
 
 function AppRouter() {
@@ -33,6 +34,7 @@ function AppRouter() {
             : <div>
                 <Routes>
                     <Route path="/login" element={<Login />}></Route>
+                    <Route path="/registration" element={<Registration />}></Route>
                     <Route path="/" element={<Navigate to="/login" />}></Route>
                 </Routes>
             </div>
