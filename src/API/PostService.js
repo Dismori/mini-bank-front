@@ -13,7 +13,9 @@ export default class PostService {
     }
 
     static async getAll() {
-        const response = await axios.get('http://localhost:3001/getAccountsInfo', { headers: { clientId: 12345 } })
+        const response = await axios.get('http://localhost:3001/getAccountsInfo', {
+            headers: { clientId: 12345 }
+        })
         console.log('getAll', response)
         return response;
     }
@@ -25,22 +27,23 @@ export default class PostService {
         console.log('create', response)
     }
 
-    static closeAccount(props) {
+    static closeAccount(id) {
         const response = axios.delete('http://localhost:3001/delete', {
-            headers: { accountid: props }
+            headers: { accountId: id, clientId: 12345 }
         })
 
         console.log('closeAccount', response)
         return response.data;
     }
 
-    static updateAccount(prop) {
-        axios.post('/', {
-            id: prop.id,
-            name: prop.name
-        }).then()
+    static updateAccount(id, sum) {
+        const response = axios.put('http://localhost:3001/deposit', {
+            accountId: id,
+            amount: sum
+        }, {
+            headers: { clientId: 12345 }
+        })
+        console.log('update', sum, id)
     }
-
-
 
 }

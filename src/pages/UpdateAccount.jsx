@@ -26,12 +26,12 @@ export default function UpdateAccount() {
     //получить список открытых счетов
     async function fetchAccounts() {
         const response = await PostService.getAll();
-        setAccounts(response)
+        setAccounts(response.data.accounts)
     }
 
     //отправить запрос на пополнение баланса
-    async function updateAccount() {
-        console.log('updateAccount done')
+    function updateAccount() {
+        const response = PostService.updateAccount(selected.id, sum);
         navigate("/")
     }
 
@@ -61,13 +61,13 @@ export default function UpdateAccount() {
                     disableClearable={true}
                     id="combo-box-demo"
                     options={accounts}
-                    getOptionLabel={(param) => param.name}
+                    getOptionLabel={(param) => param.number}
                     sx={{ width: 300 }}
                     onChange={(event, value) => setSelected(value)}
                     renderInput={(params) => <TextField {...params} label="Номер счета" />}
                 />
                 <div className="balance">
-                    <div>{selected.id}</div>
+                    <div>{selected.balance}</div>
                     <div><CurrencyRubleIcon fontSize="small" /></div>
                 </div>
             </div>
