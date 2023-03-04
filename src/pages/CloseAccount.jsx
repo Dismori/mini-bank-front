@@ -25,16 +25,17 @@ export default function CloseAccount() {
     //получить список открытых счетов
     async function fetchAccounts() {
         const response = await PostService.getAll();
-        setAccounts(response)
+        setAccounts(response.data.accounts)
     }
 
     //отправить запрос на закрытие счета
-    async function closeAccount() {
-        console.log('closeAccount done')
+    //убрать async!!!
+    function closeAccount() {
+        const response = PostService.closeAccount(selected.id);        
         navigate("/")
     }
 
-    if (selected.id == 0) {
+    if (selected.balance == 0) {
         statusButton = false
     }
 
@@ -46,13 +47,13 @@ export default function CloseAccount() {
                     disableClearable={true}
                     id="combo-box-demo"
                     options={accounts}
-                    getOptionLabel={(param) => param.name}
+                    getOptionLabel={(param) => param.number}
                     sx={{ width: 300 }}
                     onChange={(event, value) => setSelected(value)}
                     renderInput={(params) => <TextField {...params} label="Номер счета" />}
                 />
                 <div className="balance">
-                    <div>{selected.id}</div>
+                    <div>{selected.balance}</div>
                     <div><CurrencyRubleIcon fontSize="small" /></div>
                 </div>
             </div>

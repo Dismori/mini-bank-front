@@ -25,9 +25,9 @@ export default class PostService {
         console.log('create', response)
     }
 
-    static async closeAccount() {
-        const response = await axios.get('http://localhost:3001/closeAccount', {
-            headers: { clientId: 12345 }
+    static closeAccount(props) {
+        const response = axios.delete('http://localhost:3001/delete', {
+            headers: { accountid: props }
         })
 
         console.log('closeAccount', response)
