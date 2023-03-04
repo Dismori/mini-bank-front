@@ -29,9 +29,9 @@ export default function CloseAccount() {
     }
 
     //отправить запрос на закрытие счета
-    //убрать async!!!
     function closeAccount() {
-        const response = PostService.closeAccount(selected.id);        
+        const response = PostService.closeAccount(selected.id);
+        console.log('Accountid', selected.id)        
         navigate("/")
     }
 
