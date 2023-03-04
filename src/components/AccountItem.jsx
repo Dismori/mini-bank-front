@@ -7,10 +7,10 @@ function AccountItem(props) {
     return (
         <div className="accountItem">
             <div className="">
-                {props.account.name}
+                {props.account.number}
             </div>
             <div className="balance">
-                <div>{props.account.id}</div>
+                <div>{props.account.balance}</div>
                 <div><CurrencyRubleIcon fontSize="small"/></div> 
             </div>
         </div>
