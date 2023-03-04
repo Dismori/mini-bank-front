@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
@@ -27,7 +27,7 @@ export default function Login() {
                     autoComplete="current-password"
                 />
             </div>
-            <div>
+            <div className="btn">
                 <Button
                     variant="contained"
                     onClick={() => {
@@ -35,6 +35,11 @@ export default function Login() {
                     }}>
                     Продолжить
                 </Button>
+            </div>
+            <div className="reg">
+                <Link to="/registration">
+                    Регистрация
+                </Link>
             </div>
         </div>
     )

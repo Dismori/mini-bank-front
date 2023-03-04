@@ -5,6 +5,12 @@ html {
     background: #959595;
 }
 
+a, a:visited, a:hover, a::after, a:active {
+    color: inherit;
+    text-decoration: none;
+    size: 5px;
+}
+
 #root {
     display: flex;
     justify-content: center;
@@ -64,6 +70,16 @@ html {
     background: white;
 }
 
-.input  {
+.input {
     margin: 15px 0;
+}
+
+.reg {
+    margin-top: 20px;
+}
+
+.registration {
+    padding: 30px;
+    margin: 100px;
+    background: white;
 }
