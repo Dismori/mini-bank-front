@@ -17,7 +17,7 @@ function AllAccounts() {
   // получить список открытых счетов
   async function fetchAccounts() {
     const response = await PostService.getAll();
-    console.log("!!!", response.data.accounts)
+    console.log("Accounts", response.data.accounts)
     setAccounts(response.data.accounts)
   }
 
