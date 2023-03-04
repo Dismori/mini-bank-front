@@ -15,7 +15,7 @@ export default function UpdateAccount() {
     const [sum, setSum] = useState(0);
     const navigate = useNavigate();
     const [error, setError] = useState("");
-    const [statusButton, setStatusButton] = useState(false);
+    const [statusButton, setStatusButton] = useState(true);
 
     //загрузка счетов при загрузке страницы
     useEffect(() => {
@@ -26,19 +26,23 @@ export default function UpdateAccount() {
     //получить список открытых счетов
     async function fetchAccounts() {
         const response = await PostService.getAll();
-        setAccounts(response)
+        setAccounts(response.data.accounts)
     }
 
     //отправить запрос на пополнение баланса
-    async function updateAccount() {
-        console.log('updateAccount done')
+    function updateAccount() {
+        const response = PostService.updateAccount(selected.id, sum);
         navigate("/")
     }
 
     //валидация поля ввода суммы
     const handleChange = (e) => {
         const regex = /^[0-9]*[.,]?[0-9]{0,2}$/;
-        if (regex.test(e.target.value)) {
+
+        if (e.target.value == "") {
+            setStatusButton(true)
+        }
+        else if (regex.test(e.target.value)) {
             setSum(e.target.value)
             setError("")
             setStatusButton(false)
@@ -57,13 +61,13 @@ export default function UpdateAccount() {
                     disableClearable={true}
                     id="combo-box-demo"
                     options={accounts}
-                    getOptionLabel={(param) => param.name}
+                    getOptionLabel={(param) => param.number}
                     sx={{ width: 300 }}
                     onChange={(event, value) => setSelected(value)}
                     renderInput={(params) => <TextField {...params} label="Номер счета" />}
                 />
                 <div className="balance">
-                    <div>{selected.id}</div>
+                    <div>{selected.balance}</div>
                     <div><CurrencyRubleIcon fontSize="small" /></div>
                 </div>
             </div>

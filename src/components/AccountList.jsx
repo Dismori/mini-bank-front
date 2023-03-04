@@ -8,7 +8,7 @@ function AccountList(props) {
         <div className="accounts">
             <div className="description">Номер счета</div>
             {props.list.map(item =>
-                <AccountItem account={item} key={item.id}/>
+                <AccountItem account={item} key={item.balance}/>
             )}
         </div>
     );

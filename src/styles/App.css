@@ -10,10 +10,6 @@ html {
     justify-content: center;
 }
 
-.app {
-    /* width: auto; */
-}
-
 .NavBar {
     margin-top: 25%;
 }
@@ -60,4 +56,14 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.login {
+    padding: 30px;
+    margin: 100px;
+    background: white;
+}
+
+.input  {
+    margin: 15px 0;
 }

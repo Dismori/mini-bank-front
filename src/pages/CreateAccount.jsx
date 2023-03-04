@@ -12,8 +12,8 @@ export default function CreateAccount() {
     const navigate = useNavigate();
 
     //создать счет и редирект на главную страницу
-    async function createAccount() {
-        const response = await PostService.createAccount();
+    function createAccount() {
+        const response = PostService.createAccount();
         navigate("/")
     }
     
