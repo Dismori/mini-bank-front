@@ -28,10 +28,10 @@ export default function Registration() {
         setMessage({ ...message, [tag]: firstName })
     }
 
-    const handleChangeBirthDay = (event) => {
-        const tag = 'birthDay'
-        const birthDay = event.target.value
-        setMessage({ ...message, [tag]: birthDay })
+    const handleChangeBirthDate = (event) => {
+        const tag = 'birthDate'
+        const birthDate = event.target.value
+        setMessage({ ...message, [tag]: birthDate })
     }
 
     const handleChangePassport = (event) => {
@@ -96,7 +96,7 @@ export default function Registration() {
                     id="outlined-basic"
                     label="Дата рождения"
                     variant="outlined"
-                    onChange={handleChangeBirthDay}
+                    onChange={handleChangeBirthDate}
                 />
             </div>
             <div className="input">

@@ -14,7 +14,7 @@ import Registration from "../pages/Registration";
 function AppRouter() {
     let location = useLocation(); 
     return (
-        localStorage.getItem('user')
+        localStorage.getItem('clientId')
             ? <div>
                 <Routes>
                     <Route path="/" element={<NavBar />}>

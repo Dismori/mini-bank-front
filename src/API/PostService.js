@@ -2,20 +2,23 @@ import axios from "axios";
 
 export default class PostService {
 
-    static authHeader() {
-        let user = JSON.parse(localStorage.getItem('user'));
-
-        if (user && user.authdata) {
-            return { 'Authorization': 'Basic ' + user.authdata };
-        } else {
-            return {};
-        }
+    //Логин
+    static login(login, pass, callback) {
+        axios.get('http://localhost:3002/login', {
+            headers: { Authorization: 'Basic ' + window.btoa(login + ':' + pass) }
+        }).then(response => {
+            callback(response)
+            console.log(response);
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     //получить все счета и баланс по счетам клиента
     static async getAll() {
+        const clientIdValue = localStorage.getItem('clientId')
         const response = await axios.get('http://localhost:3001/getAccountsInfo', {
-            headers: { clientId: 12345 }
+            headers: { 'clientId': clientIdValue }
         })
         console.log('getAll', response)
         return response;
@@ -23,16 +26,18 @@ export default class PostService {
 
     //создать счет
     static createAccount() {
+        const clientIdValue = localStorage.getItem('clientId')
         const response = axios.post('http://localhost:3001/create', {}, {
-            headers: { clientId: 12345 }
+            headers: { 'clientId': clientIdValue }
         })
         console.log('create', response)
     }
 
     //закрыть счет
     static closeAccount(id) {
+        const clientIdValue = localStorage.getItem('clientId')
         const response = axios.delete('http://localhost:3001/delete', {
-            headers: { accountId: id, clientId: 12345 }
+            headers: { 'accountId': id, 'clientId': clientIdValue }
         })
 
         console.log('closeAccount', response)
@@ -41,11 +46,12 @@ export default class PostService {
 
     //пополнить баланс
     static updateAccount(id, sum) {
+        const clientIdValue = localStorage.getItem('clientId')
         const response = axios.put('http://localhost:3001/deposit', {
             accountId: id,
             amount: sum
         }, {
-            headers: { clientId: 12345 }
+            headers: { 'clientId': clientIdValue }
         })
         console.log('update', sum, id)
     }
