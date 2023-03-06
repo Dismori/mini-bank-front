@@ -32,6 +32,7 @@ export default function Registration() {
         const tag = 'birthDate'
         const birthDate = event.target.value
         setMessage({ ...message, [tag]: birthDate })
+
     }
 
     const handleChangePassport = (event) => {
@@ -96,7 +97,10 @@ export default function Registration() {
                     id="outlined-basic"
                     label="Дата рождения"
                     variant="outlined"
+
                     onChange={handleChangeBirthDate}
+
+           
                 />
             </div>
             <div className="input">
