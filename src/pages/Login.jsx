@@ -1,13 +1,30 @@
 import { useNavigate, Link } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import PostService from "../API/PostService";
 
 export default function Login() {
     var navigate = useNavigate();
+    var userName = ''
+    var password = '';
 
-    const login = () => {
-        localStorage.setItem('user', 'user');
-        navigate('/');
+    const sendCred = () => {
+        PostService.login(userName, password, function (response) {
+            if (response.data.clientId !== undefined) {
+                console.log('clientId', response.data.clientId)
+                localStorage.setItem('clientId', response.data.clientId);
+                console.log('LocalStorage', localStorage.getItem('clientId'))
+                navigate('/');
+            }
+        })
+    }
+
+    const handleChangeUserName = (event) => {
+        userName = event.target.value;
+    }
+
+    const handleChangePassword = (event) => {
+        password = event.target.value;
     }
 
     return (
@@ -17,6 +34,7 @@ export default function Login() {
                     id="outlined-basic"
                     label="Login"
                     variant="outlined"
+                    onChange={handleChangeUserName}
                 />
             </div>
             <div className="input">
@@ -25,13 +43,15 @@ export default function Login() {
                     label="Password"
                     type="password"
                     autoComplete="current-password"
+                    onChange={handleChangePassword}
+
                 />
             </div>
             <div className="btn">
                 <Button
                     variant="contained"
                     onClick={() => {
-                        login()
+                        sendCred()
                     }}>
                     Продолжить
                 </Button>

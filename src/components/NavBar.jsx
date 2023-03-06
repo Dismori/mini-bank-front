@@ -29,7 +29,7 @@ function NavBar(props) {
                     <Button variant="contained" onClick={() => navigate("/transfer")}>Перевести</Button>
                     <Button variant="contained" onClick={() => navigate("/close")}>Закрыть счет</Button>
                     <Button variant="contained" onClick={() => {
-                        localStorage.removeItem('user')
+                        localStorage.removeItem('clientId')
                         navigate("/login")
                     }}>Выйти</Button>
                 </ThemeProvider>
