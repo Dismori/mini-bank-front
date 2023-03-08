@@ -32,7 +32,15 @@ export default function UpdateAccount() {
     //отправить запрос на пополнение баланса
     function updateAccount() {
         const response = PostService.updateAccount(selected.id, sum);
-        navigate("/")
+        response.then(function (response) {
+            console.log(response);
+        })
+            .catch(function (error) {
+                console.log(error)
+            })
+            .finally(function () {
+                navigate("/")
+            })
     }
 
     //валидация поля ввода суммы

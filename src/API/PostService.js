@@ -54,6 +54,7 @@ export default class PostService {
             headers: { 'clientId': clientIdValue }
         })
         console.log('update', sum, id)
+        return response;
     }
 
     //зарегистрировать клиента
