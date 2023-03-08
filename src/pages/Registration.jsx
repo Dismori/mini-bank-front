@@ -14,9 +14,16 @@ export default function Registration() {
     //отправить запрос на регистрацию пользователя
     function clientReg() {
         const response = PostService.clientRegistration(message);
-        // PostService.createAccount();
+        response.then(function (response) {
+            console.log(response.data.data.id)
+            const clientId = response.data.data.id
+            if (clientId != undefined) {
+                PostService.createAccount(clientId)
+            }
+        })
         navigate("/")
     }
+    
     const handleChangeSecondName = (event) => {
         const tag = 'secondName'
         const secondName = event.target.value
@@ -101,7 +108,7 @@ export default function Registration() {
 
                     onChange={handleChangeBirthDate}
 
-           
+
                 />
             </div>
             <div className="input">
