@@ -76,4 +76,17 @@ export default class PostService {
         })
     }
 
+    //перевод другому клиенту
+    static extTransfer(accountIdFromValue, accountNumberToValue, sum) {
+        const clientIdValue = localStorage.getItem('clientId')
+        console.log(accountIdFromValue, accountNumberToValue, sum)
+        axios.put('http://localhost:3001/exttransfer', {
+            accountIdFrom: accountIdFromValue,
+            accountNumberTo: accountNumberToValue,
+            amount: sum
+        }, {
+            headers: { 'clientId': clientIdValue }
+        })
+    }
+
 }

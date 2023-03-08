@@ -32,7 +32,7 @@ export default function ExternalTransfer() {
 
     //отправить запрос на перевод между своими счетами
     async function intTransfer() {
-        PostService.intTransfer(selectedFrom.id, selectedTo, sum)
+        PostService.extTransfer(selectedFrom.id, selectedTo, sum)
         navigate("/")
     }
 
