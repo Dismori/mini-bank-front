@@ -10,9 +10,9 @@ export default function Login() {
 
     const sendCred = () => {
         PostService.login(userName, password, function (response) {
-            if (response.data.clientId !== undefined) {
-                console.log('clientId', response.data.clientId)
-                localStorage.setItem('clientId', response.data.clientId);
+            if (response.data.data !== undefined) {
+                console.log('clientId', response.data.data)
+                localStorage.setItem('clientId', response.data.data);
                 console.log('LocalStorage', localStorage.getItem('clientId'))
                 navigate('/');
             }

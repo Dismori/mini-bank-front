@@ -27,12 +27,12 @@ export default function InternalTransfer() {
     //получить список открытых счетов
     async function fetchAccounts() {
         const response = await PostService.getAll();
-        setAccounts(response)
+        setAccounts(response.data.accounts)
     }
 
     //отправить запрос на перевод между своими счетами
     async function intTransfer() {
-        console.log('Transfered done')
+        PostService.intTransfer(selectedFrom.id, selectedTo.id, sum)
         navigate("/")
     }
 
@@ -59,13 +59,13 @@ export default function InternalTransfer() {
                     disableClearable={true}
                     id="combo-box-demo"
                     options={accounts}
-                    getOptionLabel={(param) => param.name}
+                    getOptionLabel={(param) => param.number}
                     sx={{ width: 300 }}
                     onChange={(event, value) => setSelectedFrom(value)}
                     renderInput={(params) => <TextField {...params} label="Откуда" />}
                 />
                 <div className="balance">
-                    <div>{selectedFrom.id}</div>
+                    <div>{selectedFrom.balance}</div>
                     <div><CurrencyRubleIcon fontSize="small" /></div>
                 </div>
             </div>
@@ -75,13 +75,13 @@ export default function InternalTransfer() {
                     disableClearable={true}
                     id="combo-box-demo"
                     options={accounts}
-                    getOptionLabel={(param) => param.name}
+                    getOptionLabel={(param) => param.number}
                     sx={{ width: 300 }}
                     onChange={(event, value) => setSelectedTo(value)}
                     renderInput={(params) => <TextField {...params} label="Куда" />}
                 />
                 <div className="balance">
-                    <div>{selectedTo.id}</div>
+                    <div>{selectedTo.balance}</div>
                     <div><CurrencyRubleIcon fontSize="small" /></div>
                 </div>
             </div>
