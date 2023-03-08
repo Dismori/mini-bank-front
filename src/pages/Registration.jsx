@@ -14,6 +14,7 @@ export default function Registration() {
     //отправить запрос на регистрацию пользователя
     function clientReg() {
         const response = PostService.clientRegistration(message);
+        // PostService.createAccount();
         navigate("/")
     }
     const handleChangeSecondName = (event) => {
@@ -56,7 +57,7 @@ export default function Registration() {
 
     const handleChangePasswordCheck = (event) => {
         const passwordCheck = event.target.value
-        if (password != passwordCheck) {
+        if (password !== passwordCheck) {
             console.log("wrong!!!")
             setstatusButton(true)
             setError("error");

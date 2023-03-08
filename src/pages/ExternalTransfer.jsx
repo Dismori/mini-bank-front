@@ -27,12 +27,12 @@ export default function ExternalTransfer() {
     //получить список открытых счетов
     async function fetchAccounts() {
         const response = await PostService.getAll();
-        setAccounts(response)
+        setAccounts(response.data.accounts)
     }
 
     //отправить запрос на перевод между своими счетами
     async function intTransfer() {
-        console.log('Transfered done')
+        PostService.intTransfer(selectedFrom.id, selectedTo, sum)
         navigate("/")
     }
 
@@ -58,18 +58,18 @@ export default function ExternalTransfer() {
                     disableClearable={true}
                     id="combo-box-demo"
                     options={accounts}
-                    getOptionLabel={(param) => param.name}
+                    getOptionLabel={(param) => param.number}
                     sx={{ width: 300 }}
                     onChange={(event, value) => setSelectedFrom(value)}
                     renderInput={(params) => <TextField {...params} label="Откуда" />}
                 />
                 <div className="balance">
-                    <div>{selectedFrom.id}</div>
+                    <div>{selectedFrom.balance}</div>
                     <div><CurrencyRubleIcon fontSize="small" /></div>
                 </div>
             </div>
             <div className="up_account_form">
-                <TextField id="outlined-basic" label="Счет получателя" variant="outlined" />
+                <TextField id="outlined-basic" label="Счет получателя" variant="outlined" onChange={(event) => setSelectedTo(event.target.value)} />
             </div>
             <div className="up_account_btn">
                 <div>

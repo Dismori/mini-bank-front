@@ -13,7 +13,8 @@ export default function CreateAccount() {
 
     //создать счет и редирект на главную страницу
     function createAccount() {
-        const response = PostService.createAccount();
+        const clientId = localStorage.getItem('clientId')
+        const response = PostService.createAccount(clientId);
         navigate("/")
     }
     
