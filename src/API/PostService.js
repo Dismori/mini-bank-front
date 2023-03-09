@@ -90,4 +90,9 @@ export default class PostService {
         })
     }
 
+    static getCommission() {
+        const response = axios.get('http://localhost:3001/commission')
+        return response;
+    }
+
 }

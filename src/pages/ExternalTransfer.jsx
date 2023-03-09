@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
 import Button from '@mui/material/Button';
+import { fontSize } from "@mui/system";
 
 
 export default function ExternalTransfer() {
@@ -17,22 +18,32 @@ export default function ExternalTransfer() {
     const navigate = useNavigate();
     const [error, setError] = useState("");
     const [statusButton, setStatusButton] = useState(false);
+    const [commission, setCommission] = useState(0);
+    const [result, setResult] = useState(0);
 
     //загрузка счетов при загрузке страницы
     useEffect(() => {
         fetchAccounts()
     }, [])
 
+    useEffect(() => {
+        calculateSum(sum, commission)
+    }, [sum])
 
-    //получить список открытых счетов
+    //получить список открытых счетов и комиссию
     async function fetchAccounts() {
         const response = await PostService.getAll();
         setAccounts(response.data.accounts)
+        PostService.getCommission()
+            .then(function (response) {
+                setCommission(response.data)
+                console.log(commission)
+            })
     }
 
     //отправить запрос на перевод между своими счетами
-    async function intTransfer() {
-        PostService.extTransfer(selectedFrom.id, selectedTo, sum)
+    async function transfer() {
+        PostService.extTransfer(selectedFrom.id, selectedTo, result)
         navigate("/")
     }
 
@@ -49,6 +60,22 @@ export default function ExternalTransfer() {
             setStatusButton(true)
         }
     }
+
+    const rounded = (number) => {
+        return Math.round(number * 100) / 100
+
+    }
+
+    const calculateSum = (sum, commission) => {
+        if (sum == "") {
+            setResult(0)
+        }
+        else {
+            setResult(rounded(sum * commission + parseFloat(sum)))
+        }
+    }
+
+
 
     return (
         <div className="up_account">
@@ -70,13 +97,18 @@ export default function ExternalTransfer() {
             </div>
             <div className="up_account_form">
                 <TextField id="outlined-basic" label="Счет получателя" variant="outlined" onChange={(event) => setSelectedTo(event.target.value)} />
+                <div>
+                    Комиссия перевода {commission}
+                </div>
             </div>
             <div className="up_account_btn">
                 <div>
                     <TextField color={error} id="standard-basic" label="Сумма" variant="standard" onChange={(event) => handleChange(event)} />
                 </div>
                 <div>
-                    <Button disabled={statusButton} variant="contained" onClick={intTransfer}>Перевести</Button>
+                    <Button disabled={statusButton} variant="contained" onClick={transfer}>Перевести {result}
+                        <CurrencyRubleIcon fontSize="smallest" />
+                    </Button>
                 </div>
             </div>
         </div>
