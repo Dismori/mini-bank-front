@@ -14,13 +14,13 @@ export default function Registration() {
     //отправить запрос на регистрацию пользователя
     function clientReg() {
         const response = PostService.clientRegistration(message);
-        response.then(function (response) {
-            console.log(response.data.data.id)
-            const clientId = response.data.data.id
-            if (clientId != undefined) {
-                PostService.createAccount(clientId)
-            }
-        })
+        // response.then(function (response) {
+        //     console.log(response.data.data.id)
+        //     const clientId = response.data.data.id
+        //     if (clientId != undefined) {
+        //         PostService.createAccount(clientId)
+        //     }
+        // })
         navigate("/")
     }
     

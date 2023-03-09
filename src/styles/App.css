@@ -83,3 +83,11 @@ a, a:visited, a:hover, a::after, a:active {
     margin: 100px;
     background: white;
 }
+
+.up_account_form .MuiTextField-root {
+    width: 300px;
+}
+
+.up_account_btn .MuiTextField-root {
+    width: 100px;
+}
