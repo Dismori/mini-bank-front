@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
 import Button from '@mui/material/Button';
-import { fontSize } from "@mui/system";
 
 
 export default function ExternalTransfer() {
@@ -24,10 +23,12 @@ export default function ExternalTransfer() {
     //загрузка счетов при загрузке страницы
     useEffect(() => {
         fetchAccounts()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         calculateSum(sum, commission)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sum])
 
     //получить список открытых счетов и комиссию
@@ -67,11 +68,11 @@ export default function ExternalTransfer() {
     }
 
     const calculateSum = (sum, commission) => {
-        if (sum == "") {
+        if (sum === "") {
             setResult(0)
         }
         else {
-            setResult(rounded(sum * commission + parseFloat(sum)))
+            setResult(rounded(sum * commission/100 + parseFloat(sum)))
         }
     }
 
@@ -98,7 +99,7 @@ export default function ExternalTransfer() {
             <div className="up_account_form">
                 <TextField id="outlined-basic" label="Счет получателя" variant="outlined" onChange={(event) => setSelectedTo(event.target.value)} />
                 <div>
-                    Комиссия перевода {commission}
+                    Комиссия перевода {commission} %
                 </div>
             </div>
             <div className="up_account_btn">
