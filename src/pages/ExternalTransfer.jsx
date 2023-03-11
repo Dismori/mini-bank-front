@@ -16,9 +16,23 @@ export default function ExternalTransfer() {
     const [sum, setSum] = useState(0);
     const navigate = useNavigate();
     const [error, setError] = useState("");
-    const [statusButton, setStatusButton] = useState(false);
+    const [statusButton, setStatusButton] = useState(true);
     const [commission, setCommission] = useState(0);
     const [result, setResult] = useState(0);
+    const [errorSelectedTo, setErrorSelectedTo] = useState("")
+
+    const validationFields = () => {
+        if (!selectedTo || !selectedFrom || !sum || error || (result > selectedFrom.balance) || errorSelectedTo) {
+            setStatusButton(true)
+        }
+        else (
+            setStatusButton(false)
+        )
+    }
+
+    useEffect(() => {
+        validationFields()
+    }, [result, selectedTo, selectedFrom, error, errorSelectedTo])
 
     //загрузка счетов при загрузке страницы
     useEffect(() => {
@@ -54,11 +68,20 @@ export default function ExternalTransfer() {
         if (regex.test(e.target.value)) {
             setSum(e.target.value)
             setError("")
-            setStatusButton(false)
         }
         else {
             setError("error");
-            setStatusButton(true)
+        }
+    }
+
+    const handleChangeSelectedTo = (e) => {
+        const regex = /^[0-9]{20}$/;
+        if (regex.test(e.target.value)) {
+            setSelectedTo(e.target.value)
+            setErrorSelectedTo("")
+        }
+        else {
+            setErrorSelectedTo("error")
         }
     }
 
@@ -72,7 +95,7 @@ export default function ExternalTransfer() {
             setResult(0)
         }
         else {
-            setResult(rounded(sum * commission/100 + parseFloat(sum)))
+            setResult(rounded(sum * commission / 100 + parseFloat(sum)))
         }
     }
 
@@ -97,7 +120,7 @@ export default function ExternalTransfer() {
                 </div>
             </div>
             <div className="up_account_form">
-                <TextField id="outlined-basic" label="Счет получателя" variant="outlined" onChange={(event) => setSelectedTo(event.target.value)} />
+                <TextField color={errorSelectedTo} id="outlined-basic" label="Счет получателя" variant="outlined" onChange={(event) => handleChangeSelectedTo(event)} />
                 <div>
                     Комиссия перевода {commission} %
                 </div>
