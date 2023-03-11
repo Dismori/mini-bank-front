@@ -19,7 +19,7 @@ export default function InternalTransfer() {
     const [statusButton, setStatusButton] = useState(true);
 
     const validationFields = () => {
-        if (!selectedTo || !selectedFrom ||!sum || error) {
+        if (!selectedTo || !selectedFrom ||!sum || error || (sum > selectedFrom.balance || selectedFrom.id === selectedTo.id)) {
             setStatusButton(true)
         }
         else (
