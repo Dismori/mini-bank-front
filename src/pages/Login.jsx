@@ -2,8 +2,11 @@ import { useNavigate, Link } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PostService from "../API/PostService";
+import { useState } from "react";
 
 export default function Login() {
+    const [error, setError] = useState(false);
+    const [helperText, setHelperText]= useState("");
     var navigate = useNavigate();
     var userName = ''
     var password = '';
@@ -16,10 +19,18 @@ export default function Login() {
                 console.log('LocalStorage', localStorage.getItem('clientId'))
                 navigate('/');
             }
+            else {
+                setError(true)
+                setHelperText("Неверный логин или пароль");
+            }
         })
     }
 
     const handleChangeUserName = (event) => {
+        if(event.target.value === "") {
+            setError(false)
+            setHelperText("")
+        }
         userName = event.target.value;
     }
 
@@ -31,6 +42,7 @@ export default function Login() {
         <div className="login">
             <div className="input">
                 <TextField
+                    error = {error}
                     id="outlined-basic"
                     label="Login"
                     variant="outlined"
@@ -39,6 +51,8 @@ export default function Login() {
             </div>
             <div className="input">
                 <TextField
+                    error = {error}
+                    helperText={helperText}
                     id="outlined-password-input"
                     label="Password"
                     type="password"
