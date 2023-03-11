@@ -16,13 +16,25 @@ export default function InternalTransfer() {
     const [sum, setSum] = useState(0);
     const navigate = useNavigate();
     const [error, setError] = useState("");
-    const [statusButton, setStatusButton] = useState(false);
+    const [statusButton, setStatusButton] = useState(true);
+
+    const validationFields = () => {
+        if (!selectedTo || !selectedFrom ||!sum || error || (sum > selectedFrom.balance || selectedFrom.id === selectedTo.id)) {
+            setStatusButton(true)
+        }
+        else (
+            setStatusButton(false)
+        )
+    }
 
     //загрузка счетов при загрузке страницы
     useEffect(() => {
         fetchAccounts()
     }, [])
 
+    useEffect(()=> {
+        validationFields()
+    }, [sum, selectedTo, selectedFrom, error])
 
     //получить список открытых счетов
     async function fetchAccounts() {
@@ -42,11 +54,9 @@ export default function InternalTransfer() {
         if (regex.test(e.target.value)) {
             setSum(e.target.value)
             setError("")
-            setStatusButton(false)
         }
         else {
             setError("error");
-            setStatusButton(true)
         }
     }
 
