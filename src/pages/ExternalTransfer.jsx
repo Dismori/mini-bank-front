@@ -50,7 +50,7 @@ export default function ExternalTransfer() {
 
     //валидация поля ввода суммы
     const handleChange = (e) => {
-        const regex = /^[0-9]*[.,]?[0-9]{0,2}$/;
+        const regex = /^[0-9]*[.]?[0-9]{0,2}$/;
         if (regex.test(e.target.value)) {
             setSum(e.target.value)
             setError("")

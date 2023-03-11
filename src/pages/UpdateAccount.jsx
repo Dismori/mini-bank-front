@@ -45,7 +45,7 @@ export default function UpdateAccount() {
 
     //валидация поля ввода суммы
     const handleChange = (e) => {
-        const regex = /^[0-9]*[.,]?[0-9]{0,2}$/;
+        const regex = /^[0-9]*[.]?[0-9]{0,2}$/;
 
         if (e.target.value == "") {
             setStatusButton(true)
