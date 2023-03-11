@@ -17,10 +17,23 @@ export default function UpdateAccount() {
     const [error, setError] = useState("");
     const [statusButton, setStatusButton] = useState(true);
 
+    const validationFields = () => {
+        if (!selected || !sum || error) {
+            setStatusButton(true)
+        }
+        else (
+            setStatusButton(false)
+        )
+    }
+
     //загрузка счетов при загрузке страницы
     useEffect(() => {
         fetchAccounts()
     }, [])
+
+    useEffect(()=> {
+        validationFields()
+    }, [sum, selected, error])
 
 
     //получить список открытых счетов
@@ -47,17 +60,12 @@ export default function UpdateAccount() {
     const handleChange = (e) => {
         const regex = /^[0-9]*[.]?[0-9]{0,2}$/;
 
-        if (e.target.value == "") {
-            setStatusButton(true)
-        }
-        else if (regex.test(e.target.value)) {
+        if (regex.test(e.target.value)) {
             setSum(e.target.value)
             setError("")
-            setStatusButton(false)
         }
         else {
             setError("error");
-            setStatusButton(true)
         }
     }
 
