@@ -22,7 +22,7 @@ export default function ExternalTransfer() {
     const [errorSelectedTo, setErrorSelectedTo] = useState("")
 
     const validationFields = () => {
-        if (!selectedTo || !selectedFrom || !sum || error || (result > selectedFrom.balance) || errorSelectedTo) {
+        if (!selectedTo || !selectedFrom || !sum || error || (result > selectedFrom.balance) || errorSelectedTo || selectedFrom.number === selectedTo) {
             setStatusButton(true)
         }
         else (
@@ -130,9 +130,7 @@ export default function ExternalTransfer() {
                     <TextField color={error} id="standard-basic" label="Сумма" variant="standard" onChange={(event) => handleChange(event)} />
                 </div>
                 <div>
-                    <Button disabled={statusButton} variant="contained" onClick={transfer}>Перевести {result}
-                        <CurrencyRubleIcon fontSize="smallest" />
-                    </Button>
+                    <Button disabled={statusButton} variant="contained" onClick={transfer}>Перевести</Button>
                 </div>
             </div>
         </div>
