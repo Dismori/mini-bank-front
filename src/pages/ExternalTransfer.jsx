@@ -59,7 +59,15 @@ export default function ExternalTransfer() {
     //отправить запрос на перевод между своими счетами
     async function transfer() {
         PostService.extTransfer(selectedFrom.id, selectedTo, result)
-        navigate("/")
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+            .finally(function () {
+                navigate("/")
+            })
     }
 
     //валидация поля ввода суммы

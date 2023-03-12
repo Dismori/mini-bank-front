@@ -30,9 +30,16 @@ export default function CloseAccount() {
 
     //отправить запрос на закрытие счета
     function closeAccount() {
-        const response = PostService.closeAccount(selected.id);
-        console.log('Accountid', selected.id)        
-        navigate("/")
+        PostService.closeAccount(selected.id)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+            .finally(function () {
+                navigate("/")
+            })
     }
 
     if (selected.balance == 0) {
@@ -62,7 +69,7 @@ export default function CloseAccount() {
                     <Button disabled={statusButton} variant="contained" onClick={closeAccount}>Закрыть счет</Button>
                 </div>
             </div>
-            <div style={{marginTop: 'inherit', fontSize: 'small'}}>
+            <div style={{ marginTop: 'inherit', fontSize: 'small' }}>
                 <span>
                     Чтобы закрыть счет баланс должен быть равен 0
                 </span>

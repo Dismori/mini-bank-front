@@ -3,15 +3,11 @@ import axios from "axios";
 export default class PostService {
 
     //Логин
-    static login(login, pass, callback) {
-        axios.get('http://localhost:8080/client/auth', {
+    static login(login, pass) {
+        const response = axios.get('http://localhost:8080/client/auth', {
             headers: { Authorization: 'Basic ' + window.btoa(login + ':' + pass) }
-        }).then(response => {
-            callback(response)
-            console.log(response);
-        }).catch(err => {
-            console.log(err);
         })
+        return response;
     }
 
     //получить все счета и баланс по счетам клиента
@@ -41,7 +37,7 @@ export default class PostService {
         })
 
         console.log('closeAccount', response)
-        return response.data;
+        return response;
     }
 
     //пополнить баланс
@@ -68,26 +64,28 @@ export default class PostService {
     static intTransfer(accountFrom, accountTo, sum) {
         const clientIdValue = localStorage.getItem('clientId')
         console.log(accountFrom, accountTo, sum)
-        axios.put('http://localhost:3001/transfer', {
+        const response = axios.put('http://localhost:3001/transfer', {
             accountIdFrom: accountFrom,
             accountIdTo: accountTo,
             amount: sum
         }, {
             headers: { 'clientId': clientIdValue }
         })
+        return response;
     }
 
     //перевод другому клиенту
     static extTransfer(accountIdFromValue, accountNumberToValue, sum) {
         const clientIdValue = localStorage.getItem('clientId')
         console.log(accountIdFromValue, accountNumberToValue, sum)
-        axios.put('http://localhost:3001/exttransfer', {
+        const response = axios.put('http://localhost:3001/exttransfer', {
             accountIdFrom: accountIdFromValue,
             accountNumberTo: accountNumberToValue,
             amount: sum
         }, {
             headers: { 'clientId': clientIdValue }
         })
+        return response;
     }
 
     static getCommission() {

@@ -6,28 +6,28 @@ import { useState } from "react";
 
 export default function Login() {
     const [error, setError] = useState(false);
-    const [helperText, setHelperText]= useState("");
+    const [helperText, setHelperText] = useState("");
     var navigate = useNavigate();
     var userName = ''
     var password = '';
 
     const sendCred = () => {
-        PostService.login(userName, password, function (response) {
-            if (response.data.data !== undefined) {
-                console.log('clientId', response.data.data)
+        PostService.login(userName, password)
+            .then(function (response) {
                 localStorage.setItem('clientId', response.data.data);
-                console.log('LocalStorage', localStorage.getItem('clientId'))
                 navigate('/');
-            }
-            else {
-                setError(true)
-                setHelperText("Неверный логин или пароль");
-            }
-        })
+            })
+            .catch(function (error) {
+                console.log(error)
+                if (error.response.status === 401) {
+                    setError(true)
+                    setHelperText("Неверный логин или пароль");
+                }
+            })
     }
 
     const handleChangeUserName = (event) => {
-        if(event.target.value === "") {
+        if (event.target.value === "") {
             setError(false)
             setHelperText("")
         }
@@ -42,7 +42,7 @@ export default function Login() {
         <div className="login">
             <div className="input">
                 <TextField
-                    error = {error}
+                    error={error}
                     id="outlined-basic"
                     label="Login"
                     variant="outlined"
@@ -51,7 +51,7 @@ export default function Login() {
             </div>
             <div className="input">
                 <TextField
-                    error = {error}
+                    error={error}
                     helperText={helperText}
                     id="outlined-password-input"
                     label="Password"

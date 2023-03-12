@@ -19,7 +19,7 @@ export default function InternalTransfer() {
     const [statusButton, setStatusButton] = useState(true);
 
     const validationFields = () => {
-        if (!selectedTo || !selectedFrom ||!sum || error || (sum > selectedFrom.balance || selectedFrom.id === selectedTo.id)) {
+        if (!selectedTo || !selectedFrom || !sum || error || (sum > selectedFrom.balance || selectedFrom.id === selectedTo.id)) {
             setStatusButton(true)
         }
         else (
@@ -32,7 +32,7 @@ export default function InternalTransfer() {
         fetchAccounts()
     }, [])
 
-    useEffect(()=> {
+    useEffect(() => {
         validationFields()
     }, [sum, selectedTo, selectedFrom, error])
 
@@ -45,7 +45,15 @@ export default function InternalTransfer() {
     //отправить запрос на перевод между своими счетами
     async function intTransfer() {
         PostService.intTransfer(selectedFrom.id, selectedTo.id, sum)
-        navigate("/")
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+            .finally(function () {
+                navigate("/")
+            })
     }
 
     //валидация поля ввода суммы
